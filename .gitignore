@@ -25,3 +25,6 @@ coverage
 
 # Benchmarking
 benchmarks/graphs
+
+#secure information
+db_credentials.json
