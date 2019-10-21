@@ -4,13 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql');
+var session = require('express-session');
+
 var dbCredentials = require("./db_credentials.json");
 
 var indexRouter = require('./routes/index');
+var registerRouter = require('./routes/register');
 
 var app = express();
 
-var dbConnection = mysql.createConnection({
+dbConnection = mysql.createConnection({
   host: dbCredentials.serverIp,
   user: dbCredentials.username,
   password: dbCredentials.password,
@@ -22,7 +25,7 @@ dbConnection.connect(function(err) {
     console.log("Error connecting to sql database: " + err.stack);
     return;
   }
-  
+
   console.log("Successfully connected to sql server @ address: " + dbCredentials.serverIp);
 });
 
@@ -36,7 +39,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Configure session data
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: "secret!",
+  key: "",
+
+  hasError: false,
+  errorMessage: "",
+  hasRegisterSuccess: false,
+  uid: "",
+  displayName: ""
+}));
+
+// Configure body-parser
+var bodyParser = require('body-parser');
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
+
 app.use('/', indexRouter);
+app.use('/register', registerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
