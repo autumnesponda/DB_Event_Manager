@@ -5,23 +5,37 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     
     /* TEMPORARY HARDCODED DATA */
-    const welcomeText = "Welcome to EJS"
-    const uniNames = [
-        "University of Central Florida",
-        "University of South Florida",
-        "Florida State University",
-        "University of Florida",
-        "University of Miami",
-        "Full Sail University"
+    const events = [
+        {
+            name: "Border Collie Festival",
+            university: "University of Central Florida",
+            eventid: "event01",
+            time: "10-10-2020"
+        },
+        {
+            name: "Caturday",
+            university: "University of South Florida",
+            eventid: "event02",
+            time: "10-10-2020"
+        },
+        {
+            name: "Movie Night",
+            university: "Florida State University",
+            eventid: "event03",
+            time: "10-10-2020"
+        },
+        {
+            name: "Crippling Debt Day",
+            university: "Full Sail University",
+            eventid: "event04",
+            time: "10-10-2020"
+        }
     ]
-/*     const eventListData = {
-        uniNames: uniNames, welcomeText
-      } */
     /* END TEMPORARY HARDCODED DATA */
 
-  res.render('eventList', {
-    viewVariable: "I'm available in the view as 'viewVariable'"
-  });
+    res.render('eventList', { 
+        events:events
+    });
 });
 
 module.exports = router;

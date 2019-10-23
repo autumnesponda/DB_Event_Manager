@@ -15,60 +15,44 @@
 
 <body>
 
-
-
-
-
-
 <div class="container.fluid">
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <div class="container">
-                <h2>Events</h2>
+
+                <!-- BEGIN ACCORDION -->
                 <div id="accordion">
+                    <!-- BEGIN CARD ITERATION -->
+                    <%for (var event in events){%>
                     <div class="card">
                         <div class="card-header">
-                        <a id ="firstUni" class="card-link" data-toggle="collapse" href="#collapseOne">
-                            <!-- Name of University is Here -->
+                        <a class="card-link" data-toggle="collapse" href="#<%- events[event].eventid %>">
+                            <%= events[event].name %>
                         </a>
                         </div>
-                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                        <div id="<%- events[event].eventid %>" class="collapse show" data-parent="#accordion">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Event Name: </li>
-                                <li class="list-group-item">Event Category: </li>
-                                <li class="list-group-item">Description: </li>
-                                <li class="list-group-item">Time: </li>
-                                <li class="list-group-item">Date: </li>
-                                <li class="list-group-item">Location: </li>
-                                <li class="list-group-item">Contact Phone: </li>
-                                <li class="list-group-item">Contact Email: </li>
+                            <li class="list-group-item">University: </li>
+                            <li class="list-group-item">Event Category: </li>
+                            <li class="list-group-item">Description: </li>
+                            <li class="list-group-item">Time: </li>
+                            <li class="list-group-item">Date: </li>
+                            <li class="list-group-item">Location: </li>
+                            <li class="list-group-item">Contact Phone: </li>
+                            <li class="list-group-item">Contact Email: </li>
                             </ul>
                         </div>
                     </div>
+                    <%}%>
+                    <!-- END CARD ITERATION -->
                 </div>
+                <!-- END ACCORDION -->
+
             </div>
         </div>
         <div class="col-md-2"></div>
 </div>
-
-<script>
-const uniNames = [
-        "University of Central Florida",
-        "University of South Florida",
-        "Florida State University",
-        "University of Florida",
-        "University of Miami",
-        "Full Sail University"
-    ]
-    document.getElementById("firstUni").innerHTML = uniNames[0];
-
-</script>
-
-
-
-
-
 
 
 </body>
