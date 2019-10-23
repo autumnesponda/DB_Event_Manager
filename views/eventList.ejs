@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- /BOOTSTRAP -->
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/eventList.css" />
+</head>
+
+<body>
+
+
+
+
+
+
+<div class="container.fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="container">
+                <h2>Events</h2>
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                        <a id ="firstUni" class="card-link" data-toggle="collapse" href="#collapseOne">
+                            <!-- Name of University is Here -->
+                        </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Event Name: </li>
+                                <li class="list-group-item">Event Category: </li>
+                                <li class="list-group-item">Description: </li>
+                                <li class="list-group-item">Time: </li>
+                                <li class="list-group-item">Date: </li>
+                                <li class="list-group-item">Location: </li>
+                                <li class="list-group-item">Contact Phone: </li>
+                                <li class="list-group-item">Contact Email: </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+</div>
+
+<script>
+const uniNames = [
+        "University of Central Florida",
+        "University of South Florida",
+        "Florida State University",
+        "University of Florida",
+        "University of Miami",
+        "Full Sail University"
+    ]
+    document.getElementById("firstUni").innerHTML = uniNames[0];
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
