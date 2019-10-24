@@ -11,11 +11,16 @@
     <!-- /BOOTSTRAP -->
 
     <link rel="stylesheet" type="text/css" href="stylesheets/eventList.css" />
+
+    
 </head>
 
 <body>
 
-<div class="container.fluid">
+<% include ./_navbar.ejs %>
+
+
+<div id="eventBody" class="container.fluid">
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
@@ -23,6 +28,7 @@
 
                 <!-- BEGIN ACCORDION -->
                 <div id="accordion">
+
                     <!-- BEGIN CARD ITERATION -->
                     <%for (var event in events){%>
                     <div class="card">
@@ -31,9 +37,9 @@
                             <%= events[event].name %>
                         </a>
                         </div>
-                        <div id="<%- events[event].eventid %>" class="collapse show" data-parent="#accordion">
+                        <div id="<%- events[event].eventid %>" class="panel-collapse collapse" data-parent="#accordion">
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item">University: </li>
+                            <li class="list-group-item">University: <%= events[event].university %></li>
                             <li class="list-group-item">Event Category: </li>
                             <li class="list-group-item">Description: </li>
                             <li class="list-group-item">Time: </li>
@@ -46,6 +52,7 @@
                     </div>
                     <%}%>
                     <!-- END CARD ITERATION -->
+
                 </div>
                 <!-- END ACCORDION -->
 

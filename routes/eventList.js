@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
             eventid: "event04",
             time: "10-10-2020"
         }
-    ]
+    ];
     /* END TEMPORARY HARDCODED DATA */
 
     res.render('eventList', { 
