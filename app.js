@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index');
 var registerRouter = require('./routes/register');
 var eventListRouter = require('./routes/eventList');
 var createEventRouter = require('./routes/createEvent');
+var createUniRouter = require('./routes/createUni');
 
 var app = express();
 
@@ -66,6 +67,7 @@ app.use('/', indexRouter);
 app.use('/register', registerRouter);
 app.use('/eventList', eventListRouter);
 app.use('/createEvent', createEventRouter);
+app.use('/createUni', createUniRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
