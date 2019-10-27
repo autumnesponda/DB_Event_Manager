@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- /BOOTSTRAP -->
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/createEvent.css" />
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<% include ./_navbar.ejs %>
+
+<div id="eventForm" class="container.fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            
+            <h2>Create Event</h2>
+
+            <!-- BEGIN FORM -->
+            <form method="POST" action="/submit-form">
+
+                <div class="form-group">
+                    <label for="eventName">Event Name: </label>
+                    <input type="text" class="form-control" id="eventName">
+                </div>
+
+                <!-- Possibly replace with dropdown? -->
+                <div class="form-group">
+                    <label for="eventCat">Event Category: </label>
+                    <input type="text" class="form-control" id="eventCat">
+                </div>
+
+                <div class="form-group">
+                        <label for="eventDes">Event Description: </label>
+                        <input type="text" class="form-control" id="eventDes">
+                </div>
+
+                <div class="form-group">
+                        <label for="time">Time: </label>
+                        <input type="time" class="form-control" id="time">
+                </div>
+
+                <div class="form-group">
+                        <label for="date">Date: </label>
+                        <input type="date" class="form-control" id="date">
+                </div>
+
+                <!-- Google Maps Support -->
+                <div class="form-group">
+                        <label for="location">Location: </label>
+                        <input type="text" class="form-control" id="location">
+                </div>
+
+                <div class="form-group">
+                        <label for="phoneNum">Contact Phone: </label>
+                        <input type="number" class="form-control" id="phoneNum">
+                </div>
+
+                <div class="form-group">
+                        <label for="email">Contact E-Mail: </label>
+                        <input type="email" class="form-control" id="email">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <!-- END FORM -->
+
+        </div>
+        <div class="col-md-2"></div>
+</div>
+
+    
+
+
+</body>
