@@ -28,38 +28,18 @@
                     <option disabled selected>Select Location</option>
                     <option>All</option>
                     <%for (var i in events) {%>
-                    <option><%= events[i].university %></option>
+                    <option><%= events[i].School_Name %></option>
                     <%}%> 
                   </select>
                 <!-- BEGIN ACCORDION -->
                 <div id="accordion">
 
                     <!-- BEGIN CARD ITERATION -->
-<<<<<<< HEAD
-                    <%for (var i in events){%>
-                        
-                        <div class="card">
-                        <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#<%- events[i].eventid %>">
-                            <%= events[i].name %>
-                        </a>
-                        </div>
-                        <div id="<%- events[i].eventid %>" class="panel-collapse collapse" data-parent="#accordion">
-                            <ul class="list-group list-group-flush">
-                            <li class="list-group-item">University: <%= events[i].university %></li>
-                            <li class="list-group-item">Event Category: </li>
-                            <li class="list-group-item">Description: </li>
-                            <li class="list-group-item">Time: </li>
-                            <li class="list-group-item">Date: </li>
-                            <li class="list-group-item">Location: </li>
-                            <li class="list-group-item">Contact Phone: </li>
-                            <li class="list-group-item">Contact Email: </li>
-=======
                     <%for (var event in events){%>
                     <% console.log(event); %>
                     <div class="card">
                         <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#event<%- events[event].Event_Id %>">
+                        <a class="card-link" data-toggle="collapse" href="#event<%- events[i].Event_Id %>">
                             <%= events[event].Event_Name %>
                         </a>
                         </div>
@@ -73,7 +53,6 @@
                             <li class="list-group-item">Location: <%= events[event].Location %></li>
                             <li class="list-group-item">Contact Phone: <%= events[event].Contact_Phone %></li>
                             <li class="list-group-item">Contact Email: <%= events[event].Contact_Email_Address %></li>
->>>>>>> bb533ce0c5b23f5919bf0f9752d79f191900f0a6
                             </ul>
                         </div>
                     </div>
