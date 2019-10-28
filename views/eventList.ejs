@@ -24,21 +24,28 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <div class="container">
-
+                  <select class="form-control" > 
+                    <option disabled selected>Select Location</option>
+                    <option>All</option>
+                    <%for (var i in events) {%>
+                    <option><%= events[i].university %></option>
+                    <%}%> 
+                  </select>
                 <!-- BEGIN ACCORDION -->
                 <div id="accordion">
 
                     <!-- BEGIN CARD ITERATION -->
-                    <%for (var event in events){%>
-                    <div class="card">
+                    <%for (var i in events){%>
+                        
+                        <div class="card">
                         <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#<%- events[event].eventid %>">
-                            <%= events[event].name %>
+                        <a class="card-link" data-toggle="collapse" href="#<%- events[i].eventid %>">
+                            <%= events[i].name %>
                         </a>
                         </div>
-                        <div id="<%- events[event].eventid %>" class="panel-collapse collapse" data-parent="#accordion">
+                        <div id="<%- events[i].eventid %>" class="panel-collapse collapse" data-parent="#accordion">
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item">University: <%= events[event].university %></li>
+                            <li class="list-group-item">University: <%= events[i].university %></li>
                             <li class="list-group-item">Event Category: </li>
                             <li class="list-group-item">Description: </li>
                             <li class="list-group-item">Time: </li>
