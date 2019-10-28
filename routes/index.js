@@ -19,7 +19,7 @@ router.post('/', function(req, res, next)
     {
 			req.session.loggedin = true;
 			req.session.username = username;
-			res.redirect('/idk');
+			res.redirect('/eventList');
 		}
     else
     {
@@ -29,7 +29,6 @@ router.post('/', function(req, res, next)
 		res.end();
 	});
 });
-  // IF THE ACCOUNT INFORMATION MATCHES THE DB, RES.RENDER
-  // TO A NEW PAGE, CAN BE A DUMMY PAGE FOR NOW
+
 
 module.exports = router;
