@@ -1,0 +1,46 @@
+<link rel="stylesheet" type="text/css" href="stylesheets/navbar.css" />
+
+<nav class="navbar navbar-static-top navbar-expand-sm bg-light">
+
+    <!-- Navbar text-->
+    <span class="navbar-text">
+        Event Manager
+    </span>
+
+    <!-- LINKS -->
+    <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">List Events</a>
+        </li>
+
+        <div class="admin">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Add Event</a>
+            </li>
+        </div>
+
+        <div class="superadmin">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Add University</a>
+            </li>
+        </div>
+
+    </ul>
+    <!-- END LINKS -->
+
+    <!-- LOGOUT BUTTON -->
+    <ul class="nav navbar-nav">
+        <li><button id="logout" class="btn btn-dark" type="submit">Logout</button></li>
+    </ul>  
+
+</nav>
+
+<script>
+    // NAVBAR PERMISSIONS
+    if (HelpCenter.user.role=="admin"){
+        $("div.admin").show();}
+
+    if (HelpCenter.user.role=="superadmin"){
+        $("div.superadmin").show();}
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- /BOOTSTRAP -->
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/eventList.css" />
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<% include ./_navbar.ejs %>
+
+<!-- BEGIN BOOTSTRAP CONTAINER -->
+<div id="eventBody" class="container.fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="container">
+
+                <!-- BEGIN ACCORDION -->
+                <div id="accordion">
+
+                    <!-- BEGIN CARD ITERATION -->
+                    <%for (var event in events){%>
+                    <div class="card">
+                        <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#<%- events[event].eventid %>">
+                            <%= events[event].name %>
+                        </a>
+                        </div>
+                        <div id="<%- events[event].eventid %>" class="panel-collapse collapse" data-parent="#accordion">
+                            <ul class="list-group list-group-flush">
+                            <li class="list-group-item">University: <%= events[event].university %></li>
+                            <li class="list-group-item">Event Category: </li>
+                            <li class="list-group-item">Description: </li>
+                            <li class="list-group-item">Time: </li>
+                            <li class="list-group-item">Date: </li>
+                            <li class="list-group-item">Location: </li>
+                            <li class="list-group-item">Contact Phone: </li>
+                            <li class="list-group-item">Contact Email: </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <%}%>
+                    <!-- END CARD ITERATION -->
+
+                </div>
+                <!-- END ACCORDION -->
+
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+</div>
+<!-- END BOOTSTRAP CONTAINER -->
+
+
+</body>
+</html>

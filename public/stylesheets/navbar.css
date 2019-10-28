@@ -1,0 +1,8 @@
+/* Hides Navbar Links */
+div.admin, div.superadmin {
+    display: none;
+}
+
+#logout {
+    float: right;
+}
