@@ -30,22 +30,23 @@
 
                     <!-- BEGIN CARD ITERATION -->
                     <%for (var event in events){%>
+                    <% console.log(event); %>
                     <div class="card">
                         <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#<%- events[event].eventid %>">
-                            <%= events[event].name %>
+                        <a class="card-link" data-toggle="collapse" href="#event<%- events[event].Event_Id %>">
+                            <%= events[event].Event_Name %>
                         </a>
                         </div>
-                        <div id="<%- events[event].eventid %>" class="panel-collapse collapse" data-parent="#accordion">
+                        <div id="event<%- events[event].Event_Id %>" class="panel-collapse collapse" data-parent="#accordion">
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item">University: <%= events[event].university %></li>
-                            <li class="list-group-item">Event Category: </li>
-                            <li class="list-group-item">Description: </li>
-                            <li class="list-group-item">Time: </li>
-                            <li class="list-group-item">Date: </li>
-                            <li class="list-group-item">Location: </li>
-                            <li class="list-group-item">Contact Phone: </li>
-                            <li class="list-group-item">Contact Email: </li>
+                            <li class="list-group-item">University: <%= events[event].School_Name %></li>
+                            <li class="list-group-item">Event Category: <%= events[event].Event_Category %></li>
+                            <li class="list-group-item">Description: <%= events[event].Description %></li>
+                            <li class="list-group-item">Time: <%= events[event].Date_Time %></li>
+                            <li class="list-group-item">Date: <%= events[event].Date_Time %></li>
+                            <li class="list-group-item">Location: <%= events[event].Location %></li>
+                            <li class="list-group-item">Contact Phone: <%= events[event].Contact_Phone %></li>
+                            <li class="list-group-item">Contact Email: <%= events[event].Contact_Email_Address %></li>
                             </ul>
                         </div>
                     </div>
