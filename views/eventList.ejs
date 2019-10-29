@@ -39,7 +39,7 @@
                     <% console.log(event); %>
                     <div class="card">
                         <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#event<%- events[i].Event_Id %>">
+                        <a class="card-link" data-toggle="collapse" href="#event<%- events[event].Event_Id %>">
                             <%= events[event].Event_Name %>
                         </a>
                         </div>
@@ -65,6 +65,7 @@
             </div>
         </div>
         <div class="col-md-2"></div>
+    </div>
 </div>
 <!-- END BOOTSTRAP CONTAINER -->
 
