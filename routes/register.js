@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const bcrypt = require("bcrypt");
 
 /* GET registration page. */
 router.get('/', (req, res, next) => {
@@ -21,24 +22,29 @@ router.post('/', (req, res, next) => {
   const university = req.body.university;
   const isAdmin = req.body.role == "admin";
   const isSuperAdmin = req.body.role == "superadmin";
-
   // this is ugly i know but so is sql baybeeee
-  const query =
-      "INSERT INTO Users " +
-      "(Username, Password, Name, University, IsAdmin, IsSuperAdmin) " +
-      `VALUES ("${username}", "${password}", "${name}", "${university}", ` +
-      `${isAdmin}, ${isSuperAdmin});`;
 
-  dbConnection.query(query, (err, rows) => {
-    if (err) throw err;
+  bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) => {
+    if(err) throw err;
 
-    console.log("account created !");
+    const query =
+        "INSERT INTO Users " +
+        "(Username, Password, Name, University, IsAdmin, IsSuperAdmin) " +
+        `VALUES ("${username}", "${hash}", "${name}", "${university}", ` +
+        `${isAdmin}, ${isSuperAdmin});`;
 
-    // TODO: maybe redirect to login with a variable and display a message
-    //  that account creation was successful?
-    //  session data would be the ticket for that
-    //  or just straight to logged in area
-    res.render('index');
+    dbConnection.query(query, (err, rows) => {
+      if (err) throw err;
+
+      console.log("account created !");
+
+
+      // TODO: maybe redirect to login with a variable and display a message
+      //  that account creation was successful?
+      //  session data would be the ticket for that
+      //  or just straight to logged in area
+      res.render('index');
+    });
   });
 });
 

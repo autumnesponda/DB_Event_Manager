@@ -23,6 +23,8 @@ dbConnection = mysql.createConnection({
   database: dbCredentials.dbName,
 });
 
+SALT_WORK_FACTOR = 10;
+
 dbConnection.connect(function(err) {
   if (err) {
     console.log("Error connecting to sql database: " + err.stack);
