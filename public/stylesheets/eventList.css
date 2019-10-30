@@ -29,3 +29,7 @@ body {
     background-color: white;
     overflow: hidden;
   }
+
+.modal-body{
+    text-align: left;
+}
