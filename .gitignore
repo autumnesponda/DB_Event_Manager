@@ -19,6 +19,8 @@ package-lock.json
 *.log
 *.gz
 
+# JetBrains
+.idea/
 
 # Coveralls
 coverage
