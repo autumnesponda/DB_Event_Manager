@@ -22,11 +22,11 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            
+
             <h2>Create Event</h2>
 
             <!-- BEGIN FORM -->
-            <form method="POST" action="/submit-form">
+            <form method="POST" action="/createEvent">
 
                 <div class="form-group">
                     <label for="eventName">Event Name: </label>
@@ -36,6 +36,11 @@
                 <div class="form-group">
                         <label for="eventDes">Event Description: </label>
                         <input type="text" class="form-control" id="eventDes" name="eventDes">
+                </div>
+
+                <div class="form-group">
+                        <label for="eventCategory">Event Category: </label>
+                        <input type="text" class="form-control" id="eventCategory" name="eventCategory">
                 </div>
 
                 <div class="form-group">
@@ -121,7 +126,7 @@
 
 </script>
 
-    
+
 
 
 </body>
