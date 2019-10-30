@@ -6,7 +6,7 @@ var logger = require('morgan');
 var mysql = require('mysql');
 var session = require('express-session');
 
-var dbCredentials = require("./db_credentials.json");
+dbCredentials = require("./db_credentials.json");
 
 var indexRouter = require('./routes/index');
 var registerRouter = require('./routes/register');

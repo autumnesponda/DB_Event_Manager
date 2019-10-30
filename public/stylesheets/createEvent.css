@@ -1,3 +1,9 @@
 #eventForm {
     padding: 50px;
 }
+
+#map-canvas 
+{ 
+height: 400px; 
+width: 500px;
+}
