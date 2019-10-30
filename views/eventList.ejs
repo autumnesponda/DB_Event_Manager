@@ -24,6 +24,7 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <div class="container">
+
                   <select class="form-control" > 
                     <option disabled selected>Select Location</option>
                     <option>All</option>
@@ -31,6 +32,7 @@
                     <option><%= events[i].schoolName %></option>
                     <%}%> 
                   </select>
+
                 <!-- BEGIN ACCORDION -->
                 <div id="accordion">
 
@@ -53,6 +55,13 @@
                             <li class="list-group-item">Location: <%= events[event].location %></li>
                             <li class="list-group-item">Contact Phone: <%= events[event].contactPhone %></li>
                             <li class="list-group-item">Contact Email: <%= events[event].contactEmail %></li>
+                            <li class="list-group-item card text-right">
+                                <div id="partial" style="display:none"><%- include ./_comments.ejs %></div>
+
+                                
+                                <button type="button" class="btn btn-primary" id="load-partial" data-toggle="modal" data-target="#commentModal">Comments</button>
+                                
+                            </li>
                             </ul>
                         </div>
                     </div>
@@ -69,6 +78,13 @@
 </div>
 <!-- END BOOTSTRAP CONTAINER -->
 
+<script>
+
+$('#load-partial').click(function(){
+    $('#partial').show();
+});
+
+</script>
 
 </body>
 </html>
