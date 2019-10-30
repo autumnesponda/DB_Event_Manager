@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
         }
     ];
 
-    res.render('createRSO', { RSOs:RSOs });
+    res.render('createRSO', { RSOs:RSOs, isAdmin: req.session.isAdmin, isSuperAdmin: req.session.isSuperAdmin});
 });
 
 module.exports = router;

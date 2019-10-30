@@ -55,8 +55,13 @@ app.use(session({
   hasError: false,
   errorMessage: "",
   hasRegisterSuccess: false,
-  uid: "",
-  displayName: ""
+  username: "",
+  universityId: 0,
+  universityName: "",
+  loggedIn: false,
+  displayName: "",
+  isAdmin: false,
+  isSuperAdmin: false,
 }));
 
 // Configure body-parser

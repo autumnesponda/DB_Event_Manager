@@ -9,22 +9,29 @@
 
     <!-- LINKS -->
     <ul class="navbar-nav mr-auto">
-
         <li class="nav-item">
-            <a class="nav-link" href="#">List Events</a>
+            <a class="nav-link" href="/eventList">View Events</a>
         </li>
 
-        <div class="admin">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Add Event</a>
-            </li>
-        </div>
+        <li class="nav-item">
+            <a class="nav-link" href="/createRSO">Create RSO</a>
+        </li>
 
-        <div class="superadmin">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Add University</a>
-            </li>
-        </div>
+        <% if (isAdmin || isSuperAdmin) { %>
+            <div class="admin">
+                <li class="nav-item">
+                    <a class="nav-link" href="/createEvent">Add Event</a>
+                </li>
+            </div>
+        <% } %>
+
+        <% if (isSuperAdmin) { %>
+            <div class="superadmin">
+                <li class="nav-item">
+                    <a class="nav-link" href="/createUni">Add University</a>
+                </li>
+            </div>
+        <% } %>
 
     </ul>
     <!-- END LINKS -->
@@ -35,8 +42,3 @@
     </ul>
 
 </nav>
-
-<script>
-    // NAVBAR PERMISSIONS
-  
-</script>
