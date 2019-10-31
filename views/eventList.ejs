@@ -16,7 +16,7 @@
 <body>
 
 <!-- NAVBAR -->
-<% include ./_navbar.ejs %>
+<%- include('_navbar', {isAdmin: isAdmin, isSuperAdmin: isSuperAdmin}); -%>
 
 <!-- BEGIN BOOTSTRAP CONTAINER -->
 <div id="eventBody" class="container.fluid">
