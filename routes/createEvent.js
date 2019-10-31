@@ -26,8 +26,6 @@ router.post('/', (req, res, next) => {
   const schoolName = "WE MUST DO SOMETHIGN HERE";
   const eventVisibility = req.body.eventVisibility;
 
-  console.log(eventCategory);
-
   const query =
       "INSERT INTO Events " +
       "(eventName, location, eventCategory, description, dateTime, contactPhone, contactEmail, schoolId, schoolName, eventVisibility) " +
@@ -36,7 +34,7 @@ router.post('/', (req, res, next) => {
   dbConnection.query(query, (err, rows) => {
     if (err) throw err;
 
-    //res.render('createEvent');
+    res.redirect('/createEvent');
   });
 });
 

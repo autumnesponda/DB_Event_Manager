@@ -19,6 +19,8 @@ router.post('/', function(req, res, next)
   var username = req.body.username;
   var password = req.body.password;
 
+	console.log("WTF");
+
 	dbConnection.query('SELECT * FROM Users WHERE Username = ?', [username], function(error, results, fields)
 	{
 		if (results.length == 1)
