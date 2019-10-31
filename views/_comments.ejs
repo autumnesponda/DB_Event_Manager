@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="stylesheets/eventList.css" />
+
 <!-- BEGIN MODAL -->
 <div class="modal fade" id="commentModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -13,31 +15,57 @@
     
                 <!-- MODAL BODY -->
                 <div class="modal-body">
+
+                    <!-- POST COMMENT FORM -->
+                    <form method="POST" action="/submit-form">
+
+                        <!-- GRAB NAME FROM LOGIN INFO -->
+                        <div class="form-group">
+                            <label for="userName">Name: </label>
+                            <input class="form-control" type="text" placeholder="PUT NAME HERE?" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="commentText">Comment</label>
+                            <textarea class="form-control" id="commentText" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                    </form>
+                    <!-- END POST COMMENT FORM -->
     
                     <!-- BEGIN COMMENT LIST -->
+                    <h5>Comments List</h5>
                     <div class="container">
-                            <div class="comments-list">
-    
-                                <!-- BEGIN COMMENTS -->
-                                <div class="media">
-                                    <p class="pull-right"><small>5 days ago</small></p>
-                                    <a class="media-left" href="#">
-                                        <img src="http://lorempixel.com/40/40/people/1/">
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading user_name">Baltej Singh</h4>
-                                        Wow! this is really great.
-                                        <p><small><a href="">Share</a></small></p>
-                                    </div>
-                                </div>
-                                <!-- END COMMENTS -->
-    
-                        </div>
+                        <div class="comments-list">
+
+                        <!-- BEGIN COMMENTS -->
+                        <ul class="list-unstyled">
+                            <li><h></li>
+                            <li>
+                                <h5 class="mt-1 mb-1">Username</h5>
+                                <p>COMMENT BODY: Cras sit amet nibh libero, in gravida nulla. 
+                                    Nulla vel metus scelerisque ante 
+                                    sollicitudin. Cras purus odio, vestibulum in vulputate at, 
+                                    tempus viverra turpis. Fusce condimentum nunc ac nisi 
+                                    vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                            </li>
+                            <li>
+                                <h5 class="mt-1 mb-1">Username</h5>
+                                <p>COMMENT BODY: Cras sit amet nibh libero, in gravida nulla. 
+                                    Nulla vel metus scelerisque ante 
+                                    sollicitudin. Cras purus odio, vestibulum in vulputate at, 
+                                    tempus viverra turpis. Fusce condimentum nunc ac nisi 
+                                    vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                            </li>
+                        </ul>
+                        <!-- END COMMENTS -->
                     </div>
-                    <!-- END COMMENT LIST -->
-    
                 </div>
-            </div>
+            <!-- END COMMENT LIST -->
+        </div>
+    </div>
         </div>
     </div>
     <!-- END MODAL -->
