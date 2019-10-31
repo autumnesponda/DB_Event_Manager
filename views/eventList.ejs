@@ -28,8 +28,12 @@
                   <select class="form-control" > 
                     <option disabled selected>Select Location</option>
                     <option>All</option>
+                    <%var loc = [] %>
                     <%for (var i in events) {%>
-                    <option><%= events[i].schoolName %></option>
+                    <%if (loc.includes(events[i].schoolName) === false) {%>
+                        <option><%= events[i].schoolName %></option>
+                        <%= loc.push(events[i].schoolName) %>
+                    <%}%>
                     <%}%> 
                   </select>
 
