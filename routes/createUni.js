@@ -12,7 +12,6 @@ router.post('/', (req, res, next) => {
   const uniLocation = req.body.uniLocation;
   const uniDesc = req.body.uniDesc;
   const numStudents = req.body.uniStudents;
-  const uniPic = "DONT THINK SO HUN";
 
   const query =
       "INSERT INTO University " +
