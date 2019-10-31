@@ -25,18 +25,21 @@
         <div class="col-md-8">
             <div class="container">
 
-                  <select class="form-control" > 
+                  <select id="school" class="form-control" onchange="getOption()" > 
                     <option disabled selected>Select Location</option>
                     <option>All</option>
                     <%var loc = [] %>
-                    <%for (var i in events) {%>
-                    <%if (loc.includes(events[i].schoolName) === false) {%>
+                    <%for (var i in events){%>
+                    <%if (loc.includes(events[i].schoolName) === false){%>
                         <option><%= events[i].schoolName %></option>
                         <%= loc.push(events[i].schoolName) %>
                     <%}%>
                     <%}%> 
                   </select>
 
+                </br>
+                
+                
                 <!-- BEGIN ACCORDION -->
                 <div id="accordion">
 
@@ -87,6 +90,19 @@ $('#load-partial').click(function(){
     $('#partial').show();
 });
 
+/* bs function for now */
+function getOption() {
+    var e = document.getElementById("school");
+    var selectLoc = e.options[e.selectedIndex].text;
+
+    /*var option = document.getElementById('school').value;
+            selectElement = document.querySelector('#school'); 
+                      
+            output =  
+              selectElement.options[selectElement.selectedIndex].value; 
+  
+            document.querySelector('.output').textContent = output; */ 
+        } 
 </script>
 
 </body>
