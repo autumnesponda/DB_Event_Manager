@@ -2,6 +2,10 @@
     padding: 50px;
 }
 
+#locForm {
+    padding: 50px;
+}
+
 #map-canvas 
 { 
 height: 400px; 

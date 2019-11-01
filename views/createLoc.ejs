@@ -10,6 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- /BOOTSTRAP -->
 
+    <link rel="stylesheet" type="text/css" href="stylesheets/createEvent.css" />
 </head>
 
 <body>
@@ -17,43 +18,79 @@
 <!-- NAVBAR -->
 <% include ./_navbar.ejs %>
 
-<div id="uniForm" class="container.fluid">
+<div id="locForm" class="container.fluid">
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
 
-            <h2>Create University Profile</h2>
+            <h2>Create a Location</h2>
 
             <!-- BEGIN FORM -->
             <form method="POST" action="/createUni">
 
+                <!-- Begin Google Maps Support -->
                 <div class="form-group">
-                    <label for="uniName">University Name: </label>
-                    <input type="text" class="form-control" id="uniName" name="uniName">
-                </div>
+                    <label for="location" >Location: </label>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>"></script>
+                    <div id="map-canvas"></div>
+                    <label for="location" class="mt-3">Location Name: </label>
 
-                <div class="form-group">
-                    <label for="uniLocation">Location: </label>
-                    <input type="text" class="form-control" id="uniLocation" name="uniLocation">
+                    <!-- Input tags for name, latitude and longitude -->
+                    <input type="text" class="form-control" id="locName" name="locName">
+                    <input type="text" class="form-control" id="locLat" name="locLat" style="display:none">
+                    <input type="text" class="form-control" id="locLong" name="locLong" style="display:none">
                 </div>
+                <!-- End Google Maps Support -->
 
-                <div class="form-group">
-                    <label for="uniDesc">University Description: </label>
-                    <input type="text" class="form-control" id="uniDesc" name="uniDesc">
-                </div>
-
-                <div class="form-group">
-                    <label for="uniStudents">Number of Students: </label>
-                    <input type="number" class="form-control" id="uniStudents" name="uniStudents">
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <!-- Dropdown of Universities -->
+                <label for="school">University: </label>
+                <select id="school" name="uniName" class="form-control">
+                    <% for (var i in universities) { %>
+                        <option value="school<%= universities[i].id %>"><%= universities[i].Name %></option>
+                    <% } %>
+                </select>
+                
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
             </form>
             <!-- END FORM -->
 
         </div>
         <div class="col-md-2"></div>
 </div>
+
+<script>
+
+    /* Begin Javscript for Google Maps */
+    var marker, lat, lng;
+
+    function initialize() {
+        var myLatLng = new google.maps.LatLng( 28.602717, -81.200043 ),
+            myOptions = {
+                zoom: 10,
+                center: myLatLng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+                },
+            map = new google.maps.Map( document.getElementById( 'map-canvas' ), myOptions );
+            marker = new google.maps.Marker( {position: myLatLng, map: map, draggable: true} );
+            google.maps.event.addListener(marker, 'dragend', update);
+
+        marker.setMap( map );
+    }
+
+    function update() {
+        var path = marker.getPosition();
+        lat = path.lat();
+        lng = path.lng()
+        alert("Lat: " + lat + "\nLon: " + lng);
+        $("#locLat").val(lat);
+        $("#locLong").val(lng);
+    }
+
+    initialize();
+    /* End Javscript for Google Maps */
+
+</script>
+
 
 
 </body>

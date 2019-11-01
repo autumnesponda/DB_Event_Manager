@@ -63,17 +63,27 @@
                         <input type="date" class="form-control" id="date" name="eventDate">
                 </div>
 
-                <!-- Begin Google Maps Support -->
+                <!-- University Drop Down -->
                 <div class="form-group">
-                    <label for="location">Location: </label>
-                    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>"></script>
-                    <div id="map-canvas"></div>
-                    <label for="location">Location Name: </label>
-                    <input type="text" class="form-control" id="locName" name="locName">
-                    <input type="text" class="form-control" id="locLat" name="locLat" style="display:none">
-                    <input type="text" class="form-control" id="locLong" name="locLong" style="display:none">
+                    <label for="school">University: </label>
+                    <select id="school" name="uniName" class="form-control">
+                        <% for (var i in universities) { %>
+                            <option value="school<%= universities[i].id %>"><%= universities[i].Name %></option>
+                        <% } %>
+                    </select>
                 </div>
-                 <!-- End Google Maps Support -->
+
+                <!-- Location Drop Down -->
+                <div class="form-group">
+                    <label for="school">Location: </label>
+                    <select id="school" name="locName" class="form-control">
+                        <% for (var i in locations) { %>
+                            <option value="loc<%= locations[i].id %>"><%= locations[i].Name %></option>
+                        <% } %>
+                    </select>
+                </div>
+                
+                <!-- TODO: LOCATIONS LOAD FOR SPECIFIED UNIVERSITY -->
 
                 <div class="form-group">
                         <label for="phoneNum">Contact Phone: </label>
@@ -92,41 +102,5 @@
         </div>
         <div class="col-md-2"></div>
 </div>
-
-<script>
-
-    /* Begin Javscript for Google Maps */
-    var marker, lat, lng;
-
-    function initialize() {
-        var myLatLng = new google.maps.LatLng( 28.602717, -81.200043 ),
-            myOptions = {
-                zoom: 10,
-                center: myLatLng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-                },
-            map = new google.maps.Map( document.getElementById( 'map-canvas' ), myOptions );
-            marker = new google.maps.Marker( {position: myLatLng, map: map, draggable: true} );
-            google.maps.event.addListener(marker, 'dragend', update);
-
-        marker.setMap( map );
-    }
-
-    function update() {
-        var path = marker.getPosition();
-        lat = path.lat();
-        lng = path.lng()
-        alert("Lat: " + lat + "\nLon: " + lng);
-        $("#locLat").val(lat);
-        $("#locLong").val(lng);
-    }
-
-    initialize();
-    /* End Javscript for Google Maps */
-
-</script>
-
-
-
 
 </body>

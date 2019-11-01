@@ -14,6 +14,7 @@ var eventListRouter = require('./routes/eventList');
 var createEventRouter = require('./routes/createEvent');
 var createUniRouter = require('./routes/createUni');
 var createRSORouter = require('./routes/createRSO');
+var createLocRouter = require('./routes/createLoc');
 
 var app = express();
 
@@ -77,6 +78,7 @@ app.use('/eventList', eventListRouter);
 app.use('/createEvent', createEventRouter);
 app.use('/createUni', createUniRouter);
 app.use('/createRSO', createRSORouter);
+app.use('/createLoc', createLocRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

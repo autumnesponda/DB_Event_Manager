@@ -6,7 +6,25 @@ router.get('/', function(req, res, next) {
 
     var apiKey = dbCredentials.google_api_key;
 
-    res.render('createEvent', { apiKey:apiKey, isAdmin: req.session.isAdmin, isSuperAdmin: req.session.isSuperAdmin });
+    dbConnection.query("SELECT * FROM University", (err, rows) => {
+        if (err) throw err;
+
+        const universities = rows;
+
+    dbConnection.query("SELECT * FROM Location", (err, rows) => {
+        if (err) throw err;
+
+        const locations = rows;
+
+        res.render('createEvent', { 
+            apiKey: apiKey, 
+            universities: universities,
+            locations: locations,
+            isAdmin: req.session.isAdmin, 
+            isSuperAdmin: req.session.isSuperAdmin });
+
+        });
+    });
 });
 
 
