@@ -30,44 +30,40 @@
                     <option>All</option>
                     <%var loc = [] %>
                     <%for (var i in events){%>
-                    <%if (loc.includes(events[i].schoolName) === false){%>
-                        <option><%= events[i].schoolName %></option>
-                        <%= loc.push(events[i].schoolName) %>
-                    <%}%>
+                        <%if (loc.includes(events[i].schoolName) === false){%>
+                            <option><%= events[i].schoolName %></option>
+                            <%= loc.push(events[i].schoolName) %>
+                        <%}%>
                     <%}%> 
                   </select>
-
-                </br>
-                
                 
                 <!-- BEGIN ACCORDION -->
                 <div id="accordion">
 
                     <!-- BEGIN CARD ITERATION -->
                     <%for (var event in events){%>
-                    <% console.log(event); %>
                     <div class="card">
                         <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#event<%- events[event].Event_Id %>">
-                            <%= events[event].eventName %>
-                        </a>
+                            <a class="card-link" data-toggle="collapse" href="#event<%- events[event].Event_Id %>">
+                                <%= events[event].eventName %>
+                            </a>
                         </div>
                         <div id="event<%- events[event].Event_Id %>" class="panel-collapse collapse" data-parent="#accordion">
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item">University: <%= events[event].schoolName %></li>
-                            <li class="list-group-item">Event Category: <%= events[event].eventCategory %></li>
-                            <li class="list-group-item">Description: <%= events[event].description %></li>
-                            <li class="list-group-item">Time: <%= events[event].dateTime %></li>
-                            <li class="list-group-item">Date: <%= events[event].dateTime %></li>
-                            <li class="list-group-item">Location: <%= events[event].location %></li>
-                            <li class="list-group-item">Contact Phone: <%= events[event].contactPhone %></li>
-                            <li class="list-group-item">Contact Email: <%= events[event].contactEmail %></li>
-                            <li class="list-group-item card text-right">
-                                <div id="partial" style="display:none"><%- include ./_comments.ejs %></div>
-                                <button type="button" class="btn btn-primary" id="load-partial" 
-                                    data-toggle="modal" data-target="#commentModal">Comments</button>
-                                
-                            </li>
+                                <li class="list-group-item">University: <%= events[event].schoolName %></li>
+                                <li class="list-group-item">Event Category: <%= events[event].eventCategory %></li>
+                                <li class="list-group-item">Description: <%= events[event].description %></li>
+                                <li class="list-group-item">Time: <%= events[event].dateTime %></li>
+                                <li class="list-group-item">Date: <%= events[event].dateTime %></li>
+                                <li class="list-group-item">Location: <%= events[event].location %></li>
+                                <li class="list-group-item">Contact Phone: <%= events[event].contactPhone %></li>
+                                <li class="list-group-item">Contact Email: <%= events[event].contactEmail %></li>
+                                <li class="list-group-item card text-right">
+                                    <div id="partial" style="display:none"><%- include ./_comments.ejs %></div>
+                                    <button type="button" class="btn btn-primary" id="load-partial"
+                                        data-toggle="modal" data-target="#commentModal">Comments</button>
+
+                                </li>
                             </ul>
                         </div>
                     </div>

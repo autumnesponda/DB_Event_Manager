@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
   dbConnection.query("SELECT * FROM University", (err, rows) => {
     if (err) throw err;
 
-    for (var i = 0; i < rows.length; i++) { universityList.push(rows[i].Name); }
+    for (var i = 0; i < rows.length; i++) { universityList.push(rows[i].name); }
 
     res.render('register', { universityList: universityList });
   });
@@ -28,8 +28,8 @@ router.post('/', (req, res, next) => {
     if(err) throw err;
 
     const query =
-        "INSERT INTO Users " +
-        "(Username, Password, Name, University, IsAdmin, IsSuperAdmin) " +
+        "INSERT INTO User " +
+        "(username, password, name, universityName, isAdmin, isSuperAdmin) " +
         `VALUES ("${username}", "${hash}", "${name}", "${university}", ` +
         `${isAdmin}, ${isSuperAdmin});`;
 
@@ -37,7 +37,6 @@ router.post('/', (req, res, next) => {
       if (err) throw err;
 
       console.log("account created !");
-
 
       // TODO: maybe redirect to login with a variable and display a message
       //  that account creation was successful?

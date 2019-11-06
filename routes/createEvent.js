@@ -32,7 +32,14 @@ router.get('/', function(req, res, next) {
 router.post('/', (req, res, next) => {
   console.log(req.body);
   const eventName = req.body.eventName;
-  const location = req.body.locName;
+
+  // const location = req.body.locName;
+  // TODO: CONVERT THE ABOVE INTO AN ID OR SOMETHING OOF
+  //  I'M SORRY THE LOCATION NAME MIGHT NOT BE UNIQUE
+  //  an idea would be to make the value attr for each
+  //  dropdown item be the id of the location instead of the name
+  const locationId = 666;
+
   const eventCategory = req.body.eventCategory;
   const description = req.body.eventDes;
   const Time = req.body.eventTime;
@@ -46,8 +53,8 @@ router.post('/', (req, res, next) => {
 
   const query =
       "INSERT INTO Events " +
-      "(eventName, location, eventCategory, description, dateTime, contactPhone, contactEmail, schoolId, schoolName, eventVisibility) " +
-      `VALUES ("${eventName}", "${location}", "${eventCategory}", "${description}", "${dateTime}", "${contactPhone}", "${contactEmail}", "${schoolId}", "${schoolName}", "${eventVisibility}");`;
+      "(eventName, locationId, eventCategory, description, dateTime, contactPhone, contactEmail, schoolId, schoolName, eventVisibility) " +
+      `VALUES ("${eventName}", "${locationId}", "${eventCategory}", "${description}", "${dateTime}", "${contactPhone}", "${contactEmail}", "${schoolId}", "${schoolName}", "${eventVisibility}");`;
 
   dbConnection.query(query, (err, rows) => {
     if (err) throw err;
