@@ -14,6 +14,12 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/logout', (req, res) => {
+  console.log("clearing session: " + req.session);
+  req.session.destroy();
+  res.redirect('/');
+});
+
 router.post('/', function(req, res, next)
 {
   const username = req.body.username;
@@ -26,13 +32,19 @@ router.post('/', function(req, res, next)
 		{
 			bcrypt.compare(password, results[0].password, (err, matches) => {
 				if (matches){
-					req.session.hasError = false;
-					req.session.errorMessage = "";
-					req.session.loggedIn = true;
-					req.session.username = username;
-					req.session.isAdmin = results[0].isAdmin;
-					req.session.isSuperAdmin = results[0].isSuperadmin;
-					res.redirect('/eventList');
+				  const user = results[0];
+				  dbConnection.query('SELECT * FROM University WHERE Name = ?', [user.universityName], (err, row) => {
+				    if (err) throw err;
+            req.session.hasError = false;
+            req.session.errorMessage = "";
+            req.session.loggedIn = true;
+            req.session.username = username;
+            req.session.universityName = user.universityName;
+            req.session.universityId = row[0].id;
+            req.session.isAdmin = user.isAdmin;
+            req.session.isSuperAdmin = user.isSuperAdmin;
+            res.redirect('/eventList');
+          });
 				}
 				else {
 					console.log("incorrect password");
