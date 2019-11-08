@@ -63,7 +63,9 @@
                             <li class="list-group-item">Contact Phone: <%= events[event].contactPhone %></li>
                             <li class="list-group-item">Contact Email: <%= events[event].contactEmail %></li>
                             <li class="list-group-item card text-right">
-                                <div id="partial" style="display:none"><%- include ./_comments.ejs %></div>
+                                <div id="partial" style="display:none">
+                                    <%- include('_comments', {comments: comments, username: username}); %>
+                                </div>
                                 <button type="button" class="btn btn-primary" id="load-partial" 
                                     data-toggle="modal" data-target="#commentModal">Comments</button>
                                 

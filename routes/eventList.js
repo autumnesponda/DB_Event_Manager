@@ -19,7 +19,13 @@ router.get('/', function(req, res, next) {
     dbConnection.query("SELECT * FROM Comments", (err, rows) => {
       if (err) throw err;
 
-      res.render('eventList', { events: events, comments: rows, isAdmin: req.session.isAdmin, isSuperAdmin: req.session.isSuperAdmin});
+      res.render('eventList', { 
+          events: events, 
+          comments: rows, 
+          username: req.session.username,
+          isAdmin: req.session.isAdmin, 
+          isSuperAdmin: req.session.isSuperAdmin
+        });
     });
   });
 });
