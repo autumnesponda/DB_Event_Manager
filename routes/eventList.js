@@ -12,11 +12,11 @@ router.get('/', function(req, res, next) {
     return;
   }
 
-  dbConnection.query("SELECT * FROM Events", (err, rows) => {
+  dbConnection.query("SELECT * FROM Event", (err, rows) => {
     if (err) throw err;
 
     const events = rows;
-    dbConnection.query("SELECT * FROM Comments", (err, rows) => {
+    dbConnection.query("SELECT * FROM Comment", (err, rows) => {
       if (err) throw err;
 
       res.render('eventList', { 

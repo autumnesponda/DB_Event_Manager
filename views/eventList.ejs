@@ -11,6 +11,7 @@
     <!-- /BOOTSTRAP -->
 
     <link rel="stylesheet" type="text/css" href="stylesheets/eventList.css" />
+    <title>Event List</title>
 </head>
 
 <body>
@@ -30,27 +31,23 @@
                     <option>All</option>
                     <%var loc = [] %>
                     <%for (var i in events){%>
-                    <%if (loc.includes(events[i].schoolName) === false){%>
-                        <option><%= events[i].schoolName %></option>
-                        <%= loc.push(events[i].schoolName) %>
-                    <%}%>
+                        <%if (loc.includes(events[i].schoolName) === false){%>
+                            <option><%= events[i].schoolName %></option>
+                            <%= loc.push(events[i].schoolName) %>
+                        <%}%>
                     <%}%> 
                   </select>
-
-                </br>
-                
                 
                 <!-- BEGIN ACCORDION -->
                 <div id="accordion">
 
                     <!-- BEGIN CARD ITERATION -->
                     <%for (var event in events){%>
-                    <% console.log(event); %>
                     <div class="card">
                         <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#event<%- events[event].Event_Id %>">
-                            <%= events[event].eventName %>
-                        </a>
+                            <a class="card-link" data-toggle="collapse" href="#event<%- events[event].Event_Id %>">
+                                <%= events[event].eventName %>
+                            </a>
                         </div>
                         <div id="event<%- events[event].Event_Id %>" class="panel-collapse collapse" data-parent="#accordion">
                             <ul class="list-group list-group-flush">

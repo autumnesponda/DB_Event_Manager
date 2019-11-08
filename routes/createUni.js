@@ -15,7 +15,7 @@ router.post('/', (req, res, next) => {
 
   const query =
       "INSERT INTO University " +
-      "(Name, Description, numberStudents, Location) " +
+      "(name, description, numberOfStudents, location) " +
       `VALUES ("${uniName}", "${uniDesc}", "${numStudents}", "${uniLocation}");`;
 
   dbConnection.query(query, (err, rows) => {

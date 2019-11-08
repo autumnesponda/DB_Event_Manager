@@ -14,26 +14,37 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/logout', (req, res) => {
+  console.log("clearing session: " + req.session);
+  req.session.destroy();
+  res.redirect('/');
+});
+
 router.post('/', function(req, res, next)
 {
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
 
-	console.log("WTF");
-
-	dbConnection.query('SELECT * FROM Users WHERE Username = ?', [username], function(error, results, fields)
+	dbConnection.query('SELECT * FROM User WHERE username = ?', [username], function(err, results, fields)
 	{
+		if (err) throw err;
 		if (results.length == 1)
 		{
-			bcrypt.compare(password, results[0].Password, (err, matches) => {
+			bcrypt.compare(password, results[0].password, (err, matches) => {
 				if (matches){
-					req.session.hasError = false;
-					req.session.errorMessage = "";
-					req.session.loggedIn = true;
-					req.session.username = username;
-					req.session.isAdmin = results[0].IsAdmin;
-					req.session.isSuperAdmin = results[0].IsSuperadmin;
-					res.redirect('/eventList');
+				  const user = results[0];
+				  dbConnection.query('SELECT * FROM University WHERE Name = ?', [user.universityName], (err, row) => {
+				    if (err) throw err;
+            req.session.hasError = false;
+            req.session.errorMessage = "";
+            req.session.loggedIn = true;
+            req.session.username = username;
+            req.session.universityName = user.universityName;
+            req.session.universityId = row[0].id;
+            req.session.isAdmin = user.isAdmin;
+            req.session.isSuperAdmin = user.isSuperAdmin;
+            res.redirect('/eventList');
+          });
 				}
 				else {
 					console.log("incorrect password");
