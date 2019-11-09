@@ -28,10 +28,11 @@
 
               <!-- DROPDOWNS -->
               <div class="row">
+
                 <!-- Filters Universities -->
                 <div class="col-md-6">
                   <select onchange="getUni()" id="uniID" class="form-control" > 
-                    <option>Select University</option>
+                    <option value="allUni">Select University</option>
                       <%for (var i in universities) {%>
                         <option value="<%- universities[i].id %>"><%= universities[i].name %></option>
                     <%}%> 
@@ -39,11 +40,8 @@
                 </div>
 
                 <div class="col-md-6">
-                  <select class="form-control" > 
-                    <option>Select Location</option>
-                      <%for (var i in locations) {%>
-                        <option><%= locations[i].name %></option>
-                      <%}%> 
+                  <select onchange="getLoc()" id="locID" class="form-control" > 
+                    <option value="allLoc">Select Location</option>
                   </select>
                 </div>
               </div>
@@ -96,9 +94,9 @@
 
 <script>
 
+/* Converts Events and Locations array into Javascript array. */
 var eventArr = <%- JSON.stringify(events) %>;
-console.log(eventArr);
-
+var locArr = <%- JSON.stringify(locations) %>;
 
 /* Loads Modal for Comments */
 $('#load-partial').click(function(){
@@ -108,16 +106,53 @@ $('#load-partial').click(function(){
 /* Grabs University ID and hides cards that do not match Uni ID. */
 function getUni() {
   var uniID = document.getElementById("uniID").value;
-  alert(uniID);
+
+  /* PROBLEMS: Should repopulate the array after changing to a different University. */
+  /* CURRENTLY NOT WORKING whyyyyyyyyyyyyyyy*/
+  if (uniID == "allUni") {
+    alert("Matched");
+    eventArr = <%- JSON.stringify(events) %>;
+    console.log(eventArr);
+    for (i = 0; i < eventArr.length; i++)
+      {
+        var cardname = "card" + eventArr[i].id;
+        document.getElementById("card" + eventArr[i].id).style.display = "block"; 
+        $('#cardname').show();
+        console.log("card" + eventArr[i].id);
+      }
+  }
+
+  /* for loop hides all events where schoolID != chosen university */
+  for (i = 0; i < eventArr.length; i++) {
+    if (eventArr[i].schoolId != uniID) {
+      document.getElementById("card" + eventArr[i].id).style.display = "none"; }}
+
+  /* Populations Location Dropdown with Locations tied to selected Uni */
+  locArr = locArr.filter(function(location) {
+    return location.universityId == uniID; });
+
+    popLoc();
+}
+
+/* Populates Location Array */
+function popLoc() {
+  var locDrop = document.getElementById("locID"); 
+
+  for(var i = 0; i < locArr.length; i++) {
+      var loc = locArr[i];
+      var el = document.createElement("option");
+      el.textContent = loc.name;
+      el.value = loc.id;
+      locDrop.appendChild(el); }
+}
+
+/* Grabs Location ID and hides cards that do not match Loc ID. */
+function getLoc(){
+  var locID = document.getElementById("locID").value;
 
   for (i = 0; i < eventArr.length; i++) {
-    if (eventArr[i].schoolId != uniID)
-    {
-      document.getElementById("card" + eventArr[i].id).style.display = "none";
-      console.log(eventArr[i].schoolId);
-      console.log("card" + eventArr[i].id);
-    }
-  }
+    if (eventArr[i].locationId != locID) {
+      document.getElementById("card" + eventArr[i].id).style.display = "none"; }}
 }
 
 </script>
