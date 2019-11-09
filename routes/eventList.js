@@ -19,13 +19,27 @@ router.get('/', function(req, res, next) {
     dbConnection.query("SELECT * FROM Comment", (err, rows) => {
       if (err) throw err;
 
+      const comments = rows;
+      dbConnection.query("SELECT * FROM University", (err, rows) => {
+        if (err) throw err;
+  
+        const universities = rows;
+        dbConnection.query("SELECT * FROM Location", (err, rows) => {
+          if (err) throw err;
+      
+          const locations = rows;
+
       res.render('eventList', { 
           events: events, 
-          comments: rows, 
+          comments: comments, 
+          universities: universities,
+          locations: locations,
           username: req.session.username,
           isAdmin: req.session.isAdmin, 
           isSuperAdmin: req.session.isSuperAdmin
+          });
         });
+      });
     });
   });
 });

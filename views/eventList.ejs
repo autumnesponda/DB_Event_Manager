@@ -26,46 +26,57 @@
         <div class="col-md-8">
             <div class="container">
 
-                  <select id="school" class="form-control" onchange="getOption()" > 
-                    <option disabled selected>Select Location</option>
-                    <option>All</option>
-                    <%var loc = [] %>
-                    <%for (var i in events){%>
-                        <%if (loc.includes(events[i].schoolName) === false){%>
-                            <option><%= events[i].schoolName %></option>
-                            <%= loc.push(events[i].schoolName) %>
-                        <%}%>
+              <!-- DROPDOWNS -->
+              <div class="row">
+                <!-- Filters Universities -->
+                <div class="col-md-6">
+                  <select onchange="getUni()" id="uniID" class="form-control" > 
+                    <option>Select University</option>
+                      <%for (var i in universities) {%>
+                        <option value="<%- universities[i].id %>"><%= universities[i].name %></option>
                     <%}%> 
                   </select>
-                
+                </div>
+
+                <div class="col-md-6">
+                  <select class="form-control" > 
+                    <option>Select Location</option>
+                      <%for (var i in locations) {%>
+                        <option><%= locations[i].name %></option>
+                      <%}%> 
+                  </select>
+                </div>
+              </div>
+
                 <!-- BEGIN ACCORDION -->
                 <div id="accordion">
 
                     <!-- BEGIN CARD ITERATION -->
-                    <%for (var event in events){%>
-                    <div class="card">
+                    <%for (var i in events){%>
+                    <div id="card<%- events[i].id %>" class="card">
                         <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#event<%- events[event].Event_Id %>">
-                                <%= events[event].eventName %>
+                            <a class="card-link" data-toggle="collapse" href="#event<%- events[i].id %>">
+                                <%= events[i].eventName %>
                             </a>
                         </div>
-                        <div id="event<%- events[event].Event_Id %>" class="panel-collapse collapse" data-parent="#accordion">
+                        <div id="event<%- events[i].id %>" class="panel-collapse collapse" data-parent="#accordion">
                             <ul class="list-group list-group-flush">
-                            <li class="list-group-item">University: <%= events[event].schoolName %></li>
-                            <li class="list-group-item">Event Category: <%= events[event].eventCategory %></li>
-                            <li class="list-group-item">Description: <%= events[event].description %></li>
-                            <li class="list-group-item">Time: <%= events[event].dateTime %></li>
-                            <li class="list-group-item">Date: <%= events[event].dateTime %></li>
-                            <li class="list-group-item">Location: <%= events[event].location %></li>
-                            <li class="list-group-item">Contact Phone: <%= events[event].contactPhone %></li>
-                            <li class="list-group-item">Contact Email: <%= events[event].contactEmail %></li>
+                            <li class="list-group-item">University: <%= events[i].schoolName %></li>
+                            <li class="list-group-item">Event Category: <%= events[i].eventCategory %></li>
+                            <li class="list-group-item">Description: <%= events[i].description %></li>
+                            <li class="list-group-item">Time: <%= events[i].dateTime %></li>
+                            <li class="list-group-item">Date: <%= events[i].dateTime %></li>
+                            <li class="list-group-item">Location: <%= events[i].location %></li>
+                            <li class="list-group-item">Contact Phone: <%= events[i].contactPhone %></li>
+                            <li class="list-group-item">Contact Email: <%= events[i].contactEmail %></li>
                             <li class="list-group-item card text-right">
+                                <!-- BEGIN COMMENTS MODAL -->
                                 <div id="partial" style="display:none">
                                     <%- include('_comments', {comments: comments, username: username}); %>
                                 </div>
                                 <button type="button" class="btn btn-primary" id="load-partial" 
                                     data-toggle="modal" data-target="#commentModal">Comments</button>
-                                
+                                <!-- END COMMENTS MODAL -->
                             </li>
                             </ul>
                         </div>
@@ -85,23 +96,30 @@
 
 <script>
 
+var eventArr = <%- JSON.stringify(events) %>;
+console.log(eventArr);
+
+
+/* Loads Modal for Comments */
 $('#load-partial').click(function(){
     $('#partial').show();
 });
 
-/* bs function for now */
-function getOption() {
-    var e = document.getElementById("school");
-    var selectLoc = e.options[e.selectedIndex].text;
+/* Grabs University ID and hides cards that do not match Uni ID. */
+function getUni() {
+  var uniID = document.getElementById("uniID").value;
+  alert(uniID);
 
-    /*var option = document.getElementById('school').value;
-            selectElement = document.querySelector('#school'); 
-                      
-            output =  
-              selectElement.options[selectElement.selectedIndex].value; 
-  
-            document.querySelector('.output').textContent = output; */ 
-        } 
+  for (i = 0; i < eventArr.length; i++) {
+    if (eventArr[i].schoolId != uniID)
+    {
+      document.getElementById("card" + eventArr[i].id).style.display = "none";
+      console.log(eventArr[i].schoolId);
+      console.log("card" + eventArr[i].id);
+    }
+  }
+}
+
 </script>
 
 </body>
