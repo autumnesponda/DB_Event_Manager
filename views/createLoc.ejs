@@ -27,7 +27,7 @@
             <h2>Create a Location</h2>
 
             <!-- BEGIN FORM -->
-            <form method="POST" action="/createUni">
+            <form method="POST" action="/createLoc">
 
                 <!-- Begin Google Maps Support -->
                 <div class="form-group">
@@ -46,8 +46,9 @@
                 <!-- Dropdown of Universities -->
                 <label for="school">University: </label>
                 <select id="school" name="uniID" class="form-control">
+                    <option disabled selected>Select University</option>
                     <% for (var i in universities) { %>
-                        <option value="school<%= universities[i].id %>"><%= universities[i].Name %></option>
+                        <option value="<%= universities[i].id %>"><%= universities[i].name %></option>
                     <% } %>
                 </select>
                 
@@ -83,7 +84,7 @@
         var path = marker.getPosition();
         lat = path.lat();
         lng = path.lng()
-        alert("Lat: " + lat + "\nLon: " + lng);
+        // alert("Lat: " + lat + "\nLon: " + lng);
         $("#locLat").val(lat);
         $("#locLong").val(lng);
     }

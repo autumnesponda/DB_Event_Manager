@@ -3,21 +3,34 @@ var router = express.Router();
 
 /* GET Create Location page. */
 router.get('/', function(req, res, next) {
-    
-    var apiKey = dbCredentials.google_api_key;
+    const apiKey = dbCredentials.google_api_key;
 
     dbConnection.query("SELECT * FROM University", (err, rows) => {
         if (err) throw err;
-    
-        const universities = rows;
 
         res.render('createLoc', {
             apiKey: apiKey,
-            universities: universities,
+            universities: rows,
             isAdmin: req.session.isAdmin, 
             isSuperAdmin: req.session.isSuperAdmin
         });
     });
+});
+
+router.post('/', (req, res, next) => {
+    const lat = req.body.locLat;
+    const long = req.body.locLong;
+    const name = req.body.locName;
+    const universityId = req.body.uniId;
+
+    dbConnection.query('INSERT INTO Location (latitude, longitude, name, universityId) VALUES (?, ?, ?, ?)', [lat, long, name, universityId], (err, rows) => {
+       if (err) throw err;
+
+       // TODO: show success popover
+       console.log("Event Created !");
+       res.redirect('/eventList');
+    });
+
 });
 
 module.exports = router;

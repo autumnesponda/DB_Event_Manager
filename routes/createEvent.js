@@ -51,7 +51,7 @@ router.post('/', (req, res, next) => {
   const eventVisibility = req.body.eventVisibility;
 
   const query =
-      "INSERT INTO Events " +
+      "INSERT INTO Event " +
       "(eventName, locationId, eventCategory, description, dateTime, contactPhone, contactEmail, schoolId, schoolName, eventVisibility) " +
       `VALUES ("${eventName}", "${locationId}", "${eventCategory}", "${description}", "${dateTime}", "${contactPhone}", "${contactEmail}", "${schoolId}", "${schoolName}", "${eventVisibility}");`;
 
