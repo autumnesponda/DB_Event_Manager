@@ -99,6 +99,9 @@
   var eventArr = <%- JSON.stringify(events) %>;
   var locArr = <%- JSON.stringify(locations) %>;
 
+ $(() => {
+   popLoc();
+ });
   /* Loads Modal for Comments */
   $('#load-partial').click(function() {
     $('#partial').show();
@@ -108,27 +111,19 @@
   function getUni() {
     var uniID = document.getElementById("uniID").value;
 
-    /* PROBLEMS: Should repopulate the array after changing to a different University. */
-    /* CURRENTLY NOT WORKING whyyyyyyyyyyyyyyy*/
     if (uniID == "allUni") {
-      alert("Matched");
-      eventArr = <%- JSON.stringify(events) %>;
-      console.log(eventArr);
-      for (i = 0; i < eventArr.length; i++) {
-        var cardname = "card" + eventArr[i].id;
-        document.getElementById("card" + eventArr[i].id).style.display = "block";
-        $('#cardname').show();
-        console.log("card" + eventArr[i].id);
-      }
+      for (i = 0; i < eventArr.length; i++)
+       $("#card" + eventArr[i].id).show(500);
     }
-
-    /* for loop hides all events where schoolID != chosen university */
-    for (i = 0; i < eventArr.length; i++) {
-      const card =  $("#card" + eventArr[i].id);
-      if (eventArr[i].schoolId != uniID)
-        card.hide();
-      else
-        card.show();
+    else {
+      /* for loop hides all events where schoolID != chosen university */
+      for (i = 0; i < eventArr.length; i++) {
+        const card =  $("#card" + eventArr[i].id);
+        if (eventArr[i].schoolId != uniID)
+          card.hide(500);
+        else
+          card.show(500);
+      }
     }
 
     /* Populations Location Dropdown with Locations tied to selected Uni */
@@ -145,8 +140,12 @@
   function popLoc() {
     var locDrop = document.getElementById("locID");
 
-    const dropdown = $("#locId");
-    dropdown.empty();
+    $("#locID").empty();
+    // Create 'all location' option
+    var all = document.createElement("option");
+    all.textContent = "All Locations";
+    all.value = "allLoc";
+    locDrop.appendChild(all);
 
     for (var i = 0; i < locArr.length; i++) {
       var loc = locArr[i];
