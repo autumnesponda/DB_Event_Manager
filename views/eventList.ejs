@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- /BOOTSTRAP -->
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/eventList.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/eventList.css"/>
     <title>Event List</title>
 </head>
 
@@ -26,60 +26,61 @@
         <div class="col-md-8">
             <div class="container">
 
-              <!-- DROPDOWNS -->
-              <div class="row">
+                <!-- DROPDOWNS -->
+                <div class="row">
 
-                <!-- Filters Universities -->
-                <div class="col-md-6">
-                  <select onchange="getUni()" id="uniID" class="form-control" > 
-                    <option value="allUni">Select University</option>
-                      <%for (var i in universities) {%>
-                        <option value="<%- universities[i].id %>"><%= universities[i].name %></option>
-                    <%}%> 
-                  </select>
-                </div>
+                    <!-- Filters Universities -->
+                    <div class="col-md-6">
+                        <select onchange="getUni()" id="uniID" class="form-control">
+                            <option selected value="allUni">All Universities</option>
+                            <% for (var i in universities) { %>
+                                <option value="<%- universities[i].id %>"><%= universities[i].name %></option>
+                            <% } %>
+                        </select>
+                    </div>
 
-                <div class="col-md-6">
-                  <select onchange="getLoc()" id="locID" class="form-control" > 
-                    <option value="allLoc">Select Location</option>
-                  </select>
+                    <div class="col-md-6">
+                        <select onchange="getLoc()" id="locID" class="form-control">
+                            <option value="allLoc">Select Location</option>
+                        </select>
+                    </div>
                 </div>
-              </div>
 
                 <!-- BEGIN ACCORDION -->
                 <div id="accordion">
 
                     <!-- BEGIN CARD ITERATION -->
-                    <%for (var i in events){%>
-                    <div id="card<%- events[i].id %>" class="card">
-                        <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#event<%- events[i].id %>">
-                                <%= events[i].eventName %>
-                            </a>
+                    <% for (var i in events){ %>
+                        <div id="card<%- events[i].id %>" class="card">
+                            <div class="card-header">
+                                <a class="card-link" data-toggle="collapse" href="#event<%- events[i].id %>">
+                                    <%= events[i].eventName %>
+                                </a>
+                            </div>
+                            <div id="event<%- events[i].id %>" class="panel-collapse collapse" data-parent="#accordion">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">University: <%= events[i].schoolName %></li>
+                                    <li class="list-group-item">Event Category: <%= events[i].eventCategory %></li>
+                                    <li class="list-group-item">Description: <%= events[i].description %></li>
+                                    <li class="list-group-item">Time: <%= events[i].dateTime %></li>
+                                    <li class="list-group-item">Date: <%= events[i].dateTime %></li>
+                                    <li class="list-group-item">Location: <%= events[i].location %></li>
+                                    <li class="list-group-item">Contact Phone: <%= events[i].contactPhone %></li>
+                                    <li class="list-group-item">Contact Email: <%= events[i].contactEmail %></li>
+                                    <li class="list-group-item card text-right">
+                                        <!-- BEGIN COMMENTS MODAL -->
+                                        <div id="partial" style="display:none">
+                                            <%- include('_comments', {comments: comments, username: username}); %>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" id="load-partial"
+                                                data-toggle="modal" data-target="#commentModal">Comments
+                                        </button>
+                                        <!-- END COMMENTS MODAL -->
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div id="event<%- events[i].id %>" class="panel-collapse collapse" data-parent="#accordion">
-                            <ul class="list-group list-group-flush">
-                            <li class="list-group-item">University: <%= events[i].schoolName %></li>
-                            <li class="list-group-item">Event Category: <%= events[i].eventCategory %></li>
-                            <li class="list-group-item">Description: <%= events[i].description %></li>
-                            <li class="list-group-item">Time: <%= events[i].dateTime %></li>
-                            <li class="list-group-item">Date: <%= events[i].dateTime %></li>
-                            <li class="list-group-item">Location: <%= events[i].location %></li>
-                            <li class="list-group-item">Contact Phone: <%= events[i].contactPhone %></li>
-                            <li class="list-group-item">Contact Email: <%= events[i].contactEmail %></li>
-                            <li class="list-group-item card text-right">
-                                <!-- BEGIN COMMENTS MODAL -->
-                                <div id="partial" style="display:none">
-                                    <%- include('_comments', {comments: comments, username: username}); %>
-                                </div>
-                                <button type="button" class="btn btn-primary" id="load-partial" 
-                                    data-toggle="modal" data-target="#commentModal">Comments</button>
-                                <!-- END COMMENTS MODAL -->
-                            </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <%}%>
+                    <% } %>
                     <!-- END CARD ITERATION -->
 
                 </div>
@@ -94,66 +95,79 @@
 
 <script>
 
-/* Converts Events and Locations array into Javascript array. */
-var eventArr = <%- JSON.stringify(events) %>;
-var locArr = <%- JSON.stringify(locations) %>;
+  /* Converts Events and Locations array into Javascript array. */
+  var eventArr = <%- JSON.stringify(events) %>;
+  var locArr = <%- JSON.stringify(locations) %>;
 
-/* Loads Modal for Comments */
-$('#load-partial').click(function(){
+  /* Loads Modal for Comments */
+  $('#load-partial').click(function() {
     $('#partial').show();
-});
+  });
 
-/* Grabs University ID and hides cards that do not match Uni ID. */
-function getUni() {
-  var uniID = document.getElementById("uniID").value;
+  /* Grabs University ID and hides cards that do not match Uni ID. */
+  function getUni() {
+    var uniID = document.getElementById("uniID").value;
 
-  /* PROBLEMS: Should repopulate the array after changing to a different University. */
-  /* CURRENTLY NOT WORKING whyyyyyyyyyyyyyyy*/
-  if (uniID == "allUni") {
-    alert("Matched");
-    eventArr = <%- JSON.stringify(events) %>;
-    console.log(eventArr);
-    for (i = 0; i < eventArr.length; i++)
-      {
+    /* PROBLEMS: Should repopulate the array after changing to a different University. */
+    /* CURRENTLY NOT WORKING whyyyyyyyyyyyyyyy*/
+    if (uniID == "allUni") {
+      alert("Matched");
+      eventArr = <%- JSON.stringify(events) %>;
+      console.log(eventArr);
+      for (i = 0; i < eventArr.length; i++) {
         var cardname = "card" + eventArr[i].id;
-        document.getElementById("card" + eventArr[i].id).style.display = "block"; 
+        document.getElementById("card" + eventArr[i].id).style.display = "block";
         $('#cardname').show();
         console.log("card" + eventArr[i].id);
       }
-  }
+    }
 
-  /* for loop hides all events where schoolID != chosen university */
-  for (i = 0; i < eventArr.length; i++) {
-    if (eventArr[i].schoolId != uniID) {
-      document.getElementById("card" + eventArr[i].id).style.display = "none"; }}
+    /* for loop hides all events where schoolID != chosen university */
+    for (i = 0; i < eventArr.length; i++) {
+      const card =  $("#card" + eventArr[i].id);
+      if (eventArr[i].schoolId != uniID)
+        card.hide();
+      else
+        card.show();
+    }
 
-  /* Populations Location Dropdown with Locations tied to selected Uni */
-  locArr = locArr.filter(function(location) {
-    return location.universityId == uniID; });
+    /* Populations Location Dropdown with Locations tied to selected Uni */
+    if (uniID != "allUni") {
+      locArr = locArr.filter(function(location) {
+        return location.universityId == uniID;
+      });
+    }
 
     popLoc();
-}
+  }
 
-/* Populates Location Array */
-function popLoc() {
-  var locDrop = document.getElementById("locID"); 
+  /* Populates Location Array */
+  function popLoc() {
+    var locDrop = document.getElementById("locID");
 
-  for(var i = 0; i < locArr.length; i++) {
+    const dropdown = $("#locId");
+    dropdown.empty();
+
+    for (var i = 0; i < locArr.length; i++) {
       var loc = locArr[i];
       var el = document.createElement("option");
       el.textContent = loc.name;
       el.value = loc.id;
-      locDrop.appendChild(el); }
-}
+      locDrop.appendChild(el);
+    }
+  }
 
-/* Grabs Location ID and hides cards that do not match Loc ID. */
-function getLoc(){
-  var locID = document.getElementById("locID").value;
+  /* Grabs Location ID and hides cards that do not match Loc ID. */
+  function getLoc() {
+    var locID = document.getElementById("locID").value;
 
-  for (i = 0; i < eventArr.length; i++) {
-    if (eventArr[i].locationId != locID) {
-      document.getElementById("card" + eventArr[i].id).style.display = "none"; }}
-}
+    for (i = 0; i < eventArr.length; i++) {
+      if (eventArr[i].locationId != locID)
+        document.getElementById("card" + eventArr[i].id).style.display = "none";
+      else
+        document.getElementById("card" + eventArr[i].id).style.display = "none";
+    }
+  }
 
 </script>
 
