@@ -28,17 +28,20 @@ router.post('/', function(req, res, next)
 	dbConnection.query('SELECT * FROM User WHERE username = ?', [username], function(err, results, fields)
 	{
 		if (err) throw err;
+
 		if (results.length == 1)
 		{
 			bcrypt.compare(password, results[0].password, (err, matches) => {
 				if (matches){
 				  const user = results[0];
-				  dbConnection.query('SELECT * FROM University WHERE Name = ?', [user.universityName], (err, row) => {
+				  dbConnection.query('SELECT * FROM University WHERE name = ?', [user.universityName], (err, row) => {
 				    if (err) throw err;
+
             req.session.hasError = false;
             req.session.errorMessage = "";
             req.session.loggedIn = true;
             req.session.username = username;
+            req.session.studentId = results[0].id;
             req.session.universityName = user.universityName;
             req.session.universityId = row[0].id;
             req.session.isAdmin = user.isAdmin;

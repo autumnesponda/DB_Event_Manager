@@ -3,6 +3,12 @@ var router = express.Router();
 
 /* GET Create Event page. */
 router.get('/', function(req, res, next) {
+  if(!req.session.loggedIn) {
+    req.session.hasError = true;
+    req.session.errorMessage = "You must be logged in to access that area!";
+    res.redirect("/");
+    return;
+  }
 
   var apiKey = dbCredentials.google_api_key;
 

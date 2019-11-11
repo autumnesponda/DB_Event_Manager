@@ -3,6 +3,13 @@ var router = express.Router();
 
 /* GET Create Location page. */
 router.get('/', function(req, res, next) {
+    if(!req.session.loggedIn) {
+        req.session.hasError = true;
+        req.session.errorMessage = "You must be logged in to access that area!";
+        res.redirect("/");
+        return;
+    }
+
     const apiKey = dbCredentials.google_api_key;
 
     dbConnection.query("SELECT * FROM University", (err, rows) => {
@@ -30,7 +37,6 @@ router.post('/', (req, res, next) => {
        console.log("Event Created !");
        res.redirect('/eventList');
     });
-
 });
 
 module.exports = router;

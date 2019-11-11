@@ -27,14 +27,14 @@
             <h2>Join a Registered Student Organization</h2>
 
             <!-- BEGIN JOIN RSO FORM -->
-            <form method="POST" action="/submit-form1">
+            <form method="POST" action="/createRSO/join">
 
                 <label for="uniName">Join Existing Organization: </label>
                 <div class="form-group">
-                    <select class="form-control"> 
+                    <select class="form-control" name="RSOid">
                         <option disabled selected>Select RSO</option>
                         <%for (var i in RSOs) {%>
-                            <option><%= RSOs[i].name %></option>
+                            <option value="<%= RSOs[i].id %>"><%= RSOs[i].name %></option>
                         <%}%> 
                     </select>
                 </div>
@@ -47,29 +47,26 @@
             <h2 id="createRSO">Create a Registered Student Organization</h2>
 
             <!-- BEGIN CREATE RSO FORM -->
-            <form method="POST" action="/submit-form2">
+            <form method="POST" action="/createRSO/create">
 
                 <div class="form-group">
                     <label for="uniName">Organization Name: </label>
-                    <input type="text" class="form-control" id="RSOName">
+                    <input type="text" class="form-control" id="RSOName" name="rsoName">
                 </div>
 
                 <div class="form-group">
                         <label for="uniName">Organization Type: </label>
-                        <input type="text" class="form-control" id="RSOType">
+                        <input type="text" class="form-control" id="RSOType" name="rsoType">
                 </div>
 
-                <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="admin" id="adminCheck" name="admin">
-                        <label class="form-check-label" for="adminCheck">
-                            Admin?
-                        </label>
-                </div>
+<!--                <div class="form-check">-->
+<!--                        <input class="form-check-input" type="checkbox" value="admin" id="adminCheck" name="isAdmin">-->
+<!--                        <label class="form-check-label" for="adminCheck">-->
+<!--                            Admin?-->
+<!--                        </label>-->
+<!--                </div>-->
 
                 <button type="submit" class="btn btn-primary">Submit</button>
-
-                <!-- Do we need to pass the user information with the form submit? -->
-
             </form>
             <!-- END CREATE RSO FORM -->
 

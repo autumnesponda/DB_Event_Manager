@@ -57,6 +57,7 @@ app.use(session({
   errorMessage: "",
   hasRegisterSuccess: false,
   username: "",
+  studentId: 0,
   universityId: 0,
   universityName: "",
   loggedIn: false,
