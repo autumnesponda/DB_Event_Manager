@@ -66,8 +66,7 @@
                                     <% } %>
                                     <li class="list-group-item">Event Category: <%= events[i].eventCategory %></li>
                                     <li class="list-group-item">Description: <%= events[i].description %></li>
-                                    <li class="list-group-item">Time: <%= events[i].dateTime %></li>
-                                    <li class="list-group-item">Date: <%= events[i].dateTime %></li>
+                                    <li class="list-group-item">Date & Time: <%= events[i].dateTime %></li>
                                       <% for (var j in locations) { %>
                                         <% if(events[i].locationId == locations[j].id){ %>
                                           <li class="list-group-item">Location: <%= locations[j].name %></li>
