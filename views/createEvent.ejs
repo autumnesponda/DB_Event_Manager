@@ -69,22 +69,32 @@
                     <label for="school">University: </label>
                     <select id="school" name="uniName" class="form-control">
                         <% for (var i in universities) { %>
-                            <option value="school<%= universities[i].id %>"><%= universities[i].Name %></option>
+                            <option value="school<%= universities[i].id %>"><%= universities[i].name %></option>
                         <% } %>
                     </select>
                 </div>
+
+                <!-- TODO: LOCATIONS AND RSO'S LOAD FOR ADMIN'S UNIVERSITY -->
 
                 <!-- Location Drop Down -->
                 <div class="form-group">
                     <label for="school">Location: </label>
                     <select id="school" name="locName" class="form-control">
                         <% for (var i in locations) { %>
-                            <option value="loc<%= locations[i].id %>"><%= locations[i].Name %></option>
+                            <option value="loc<%= locations[i].id %>"><%= locations[i].name %></option>
                         <% } %>
                     </select>
                 </div>
                 
-                <!-- TODO: LOCATIONS LOAD FOR SPECIFIED UNIVERSITY -->
+                <!-- RSO Drop Down -->
+                <div class="form-group">
+                  <label for="rso">RSO: </label>
+                  <select id="rso" name="rsoName" class="form-control">
+                      <% for (var i in activeRSO) { %>
+                          <option value="rso<%= activeRSO[i].id %>"><%= activeRSO[i].name %></option>
+                      <% } %>
+                  </select>
+                </div>
 
                 <div class="form-group">
                         <label for="phoneNum">Contact Phone: </label>
