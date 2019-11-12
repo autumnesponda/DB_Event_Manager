@@ -42,4 +42,21 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.post('/comment', (req, res, next) => {
+  const username = req.body.userName;
+  const commentText = req.body.commentText;
+  const eventId = req.body.eventId;
+
+  const query =
+      "INSERT INTO Comment " +
+      "(name, body, eventId) " +
+      `VALUES ("${username}", "${commentText}", "${eventId}");`;
+
+  dbConnection.query(query, (err, rows) => {
+    if (err) throw err;
+
+    res.redirect('/eventList');
+  });
+});
+
 module.exports = router;

@@ -77,11 +77,9 @@
                                     <li class="list-group-item">Contact Email: <%= events[i].contactEmail %></li>
                                     <li class="list-group-item card text-right">
                                         <!-- BEGIN COMMENTS MODAL -->
-                                        <div id="partial" style="display:none">
-                                            <%- include('_comments', {comments: comments, username: username}); %>
-                                        </div>
-                                        <button type="button" class="btn btn-primary" id="load-partial"
-                                                data-toggle="modal" data-target="#commentModal">Comments
+                                        <%- include('_comments', {comments: comments, username: username, eventId: events[i].id}); %>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment<%= events[i].id %>">
+                                          Comments
                                         </button>
                                         <!-- END COMMENTS MODAL -->
                                     </li>
@@ -110,10 +108,6 @@
  $(() => {
    popLoc();
  });
-  /* Loads Modal for Comments */
-  $('#load-partial').click(function() {
-    $('#partial').show();
-  });
 
   /* Grabs University ID and hides cards that do not match Uni ID. */
   function getUni() {
