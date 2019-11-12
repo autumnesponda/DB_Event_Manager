@@ -72,6 +72,7 @@
                 <div class="form-group">
                     <label for="school">Location: </label>
                     <select id="school" name="locName" class="form-control">
+                        <option selected disabled>Select a Location</option>
                         <% for (var i in locations) { %>
                             <option value="<%= locations[i].id %>"><%= locations[i].name %></option>
                         <% } %>
@@ -82,10 +83,11 @@
                 <div class="form-group">
                   <label for="rso">RSO: </label>
                   <select id="rso" name="rsoName" class="form-control">
+                      <option selected disabled>Select an RSO</option>
                       <% for (var i in activeRSO) { %>
-                          <option value="<%= activeRSO[i].id %>"><%= activeRSO[i].name %></option>
-                      <% } %>
-                  </select>
+                              <option value="<%= activeRSO[i].id %>"><%= activeRSO[i].name %></option>
+                          <% } %>
+                      </select>
                 </div>
 
                 <div class="form-group">
