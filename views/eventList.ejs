@@ -26,6 +26,24 @@
         <div class="col-md-8">
             <div class="container">
 
+                <!-- top of page success/failure alerts -->
+                <% if(hasSuccess) { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" id="successAlert">
+                        <strong>Success</strong> <%= successMessage %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <% } %>
+                <% if(hasError) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="errorAlert">
+                        <strong>Success</strong> <%= errorMessage %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <% } %>
+
                 <!-- DROPDOWNS -->
                 <div class="row">
 
@@ -154,6 +172,7 @@
       var el = document.createElement("option");
       el.textContent = loc.name;
       el.value = loc.id;
+      el.id = "locationDropDownItem" + loc.id;
       locDrop.appendChild(el);
     }
   }
@@ -163,10 +182,13 @@
     var locID = document.getElementById("locID").value;
 
     for (i = 0; i < eventArr.length; i++) {
+      // document.getElementById("card" + eventArr[i].id).style.display = "none";
+      console.log(`comparing ${locId} and ${eventArr[i]}.id`);
+
       if (eventArr[i].locationId != locID)
-        document.getElementById("card" + eventArr[i].id).style.display = "none";
+        $("#locationDropDownItem" + locID).hide();
       else
-        document.getElementById("card" + eventArr[i].id).style.display = "none";
+        $("#locationDropDownItem" + locID).show();
     }
   }
 

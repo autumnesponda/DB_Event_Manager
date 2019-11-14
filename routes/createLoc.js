@@ -28,7 +28,7 @@ router.post('/', (req, res, next) => {
     const lat = req.body.locLat;
     const long = req.body.locLong;
     const name = req.body.locName;
-    const universityId = req.body.uniId;
+    const universityId = req.body.uniID;
 
     dbConnection.query('INSERT INTO Location (latitude, longitude, name, universityId) VALUES (?, ?, ?, ?)', [lat, long, name, universityId], (err, rows) => {
        if (err) throw err;

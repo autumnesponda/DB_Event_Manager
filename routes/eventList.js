@@ -22,19 +22,20 @@ router.get('/', function(req, res, next) {
         if (err) throw err;
   
         const universities = rows;
-        dbConnection.query("SELECT * FROM Location", (err, rows) => {
+        dbConnection.query("SELECT * FROM Location", (err, locations) => {
           if (err) throw err;
-      
-          const locations = rows;
-
-      res.render('eventList', { 
-          events: events, 
-          comments: comments, 
-          universities: universities,
-          locations: locations,
-          username: req.session.username,
-          isAdmin: req.session.isAdmin, 
-          isSuperAdmin: req.session.isSuperAdmin
+          res.render('eventList', {
+              events: events,
+              comments: comments,
+              universities: universities,
+              locations: locations,
+              username: req.session.username,
+              isAdmin: req.session.isAdmin,
+              isSuperAdmin: req.session.isSuperAdmin,
+              hasError: false,
+              errorMessage: "",
+              hasSuccess: false,
+              successMessage: ""
           });
         });
       });

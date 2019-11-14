@@ -28,8 +28,6 @@ router.get('/', function(req, res, next) {
   });
 });
 
-
-
 router.post('/', (req, res, next) => {
   const eventName = req.body.eventName;
   const locationId = req.body.locName;
