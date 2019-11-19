@@ -37,12 +37,13 @@ router.post('/', (req, res, next) => {
   const contactPhone = req.body.phoneNum;
   const contactEmail = req.body.email;
   const schoolId = req.session.universityId;
+  const rsoId = req.session.rsoId;
   const eventVisibility = req.body.eventVisibility;
 
   const query =
       "INSERT INTO Event " +
-      "(eventName, locationId, eventCategory, description, dateTime, contactPhone, contactEmail, schoolId, eventVisibility) " +
-      `VALUES ("${eventName}", "${locationId}", "${eventCategory}", "${description}", "${eventDateTime}", "${contactPhone}", "${contactEmail}", "${schoolId}", "${eventVisibility}");`;
+      "(eventName, locationId, eventCategory, description, dateTime, contactPhone, contactEmail, schoolId, rsoId, eventVisibility) " +
+      `VALUES ("${eventName}", "${locationId}", "${eventCategory}", "${description}", "${eventDateTime}", "${contactPhone}", "${contactEmail}", "${schoolId}", "${rsoId}", "${eventVisibility}");`;
 
   dbConnection.query(query, (err, rows) => {
     if (err) throw err;

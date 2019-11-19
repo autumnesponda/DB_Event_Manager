@@ -10,20 +10,31 @@ router.get('/', function(req, res, next) {
     return;
   }
 
-  dbConnection.query("SELECT * FROM Event", (err, rows) => {
+  const hasError = req.session.hasError;
+  const errorMessage = req.session.errorMessage;
+  const hasSuccess = req.session.hasSuccess;
+  const successMessage = req.session.successMessage;
+
+  req.session.hasError = false;
+  req.session.errorMessage = "";
+  req.session.hasSuccess = false;
+  req.session.successMessage = "";
+
+  const universityId = req.session.universityId;
+  const studentId = req.session.studentId;
+
+  dbConnection.query(getEventQuery(universityId, studentId), (err, events) => {
     if (err) throw err;
 
-    const events = rows;
-    dbConnection.query("SELECT * FROM Comment", (err, rows) => {
+    dbConnection.query("SELECT * FROM Comment", (err, comments) => {
       if (err) throw err;
 
-      const comments = rows;
-      dbConnection.query("SELECT * FROM University", (err, rows) => {
+      dbConnection.query("SELECT * FROM University", (err, universities) => {
         if (err) throw err;
   
-        const universities = rows;
         dbConnection.query("SELECT * FROM Location", (err, locations) => {
           if (err) throw err;
+
           res.render('eventList', {
               events: events,
               comments: comments,
@@ -32,10 +43,10 @@ router.get('/', function(req, res, next) {
               username: req.session.username,
               isAdmin: req.session.isAdmin,
               isSuperAdmin: req.session.isSuperAdmin,
-              hasError: false,
-              errorMessage: "",
-              hasSuccess: false,
-              successMessage: ""
+              hasError: hasError,
+              errorMessage: errorMessage,
+              hasSuccess: hasSuccess,
+              successMessage: successMessage
           });
         });
       });
@@ -59,5 +70,14 @@ router.post('/comment', (req, res, next) => {
     res.redirect('/eventList');
   });
 });
+
+
+function getEventQuery(uniId, studentId) {
+  return `SELECT * FROM Event WHERE eventVisibility='public'
+  UNION
+  SELECT * FROM Event WHERE eventVisibility='private' AND schoolId = ${uniId}
+  UNION 
+  SELECT Event.* FROM Event, RSOMember WHERE Event.eventVisibility='rso' AND Event.rsoId=RSOMember.rsoId AND RSOMember.userId = ${studentId}`;
+}
 
 module.exports = router;
